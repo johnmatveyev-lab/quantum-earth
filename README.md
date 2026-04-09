@@ -4,6 +4,10 @@
 
 Real-time 3D aerospace intelligence and tracking platform with voice AI.
 
+## Screenshots
+![Overview](public/placeholder.svg)
+![Voice Panel](public/placeholder.svg)
+
 ## Highlights
 - Live 3D globe visualization for aircraft, satellites, rockets, and vessels
 - Layered environmental overlays (night lights, infrared, clouds, precipitation, etc.)
@@ -54,6 +58,12 @@ The app includes a **Voice Mode switcher**:
 npx vitest run
 ```
 
+## Roadmap
+- Replace placeholders with real product screenshots
+- Add mission replay timelines with shareable links
+- Add team workspaces, roles, and audit logging
+- Expand anomaly detection and collision prediction
+
 ## Deployment Notes
 - Ensure Supabase secrets are configured.
 - Update LiveKit and xAI keys in Supabase if you enable voice.
@@ -64,4 +74,4 @@ npx vitest run
 - Do not commit private API keys.
 
 ## License
-No license specified yet. Add one if you plan to open-source.
+MIT
