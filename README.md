@@ -5,8 +5,9 @@
 Real-time 3D aerospace intelligence and tracking platform with voice AI.
 
 ## Screenshots
-![Overview](public/placeholder.svg)
-![Voice Panel](public/placeholder.svg)
+![Landing](public/screenshots/landing.png)
+![App Overview](public/screenshots/app.png)
+![Voice Panel](public/screenshots/voice.png)
 
 ## Highlights
 - Live 3D globe visualization for aircraft, satellites, rockets, and vessels
@@ -59,7 +60,6 @@ npx vitest run
 ```
 
 ## Roadmap
-- Replace placeholders with real product screenshots
 - Add mission replay timelines with shareable links
 - Add team workspaces, roles, and audit logging
 - Expand anomaly detection and collision prediction
