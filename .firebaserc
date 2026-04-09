@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "dining-out-cpmpwe"
+  },
+  "targets": {
+    "dining-out-cpmpwe": {
+      "hosting": {
+        "qorbit": [
+          "qorbit"
+        ]
+      }
+    }
+  }
+}

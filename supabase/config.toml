@@ -1,0 +1,37 @@
+project_id = "modoxhqrhuawfwnvxixo"
+
+[functions.ai-analyze]
+verify_jwt = false
+
+[functions.opensky-proxy]
+verify_jwt = false
+
+[functions.spacex-proxy]
+verify_jwt = false
+
+[functions.ai-copilot]
+verify_jwt = false
+
+[functions.gemini-live-token]
+verify_jwt = false
+
+[functions.xai-token]
+verify_jwt = false
+
+[functions.livekit-token]
+verify_jwt = false
+
+[functions.stripe-checkout]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.stripe-portal]
+verify_jwt = true
+
+[functions.celestrak-proxy]
+verify_jwt = false
+
+[functions.snapshot-worker]
+verify_jwt = false
