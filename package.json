@@ -23,9 +23,10 @@
   ],
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 8080",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "preview": "vite preview --host 0.0.0.0 --port 8080",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -105,6 +106,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.0.0",
+    "@types/google.maps": "^3.58.1",
     "@types/node": "^22.16.5",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
