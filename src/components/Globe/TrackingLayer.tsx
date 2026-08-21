@@ -16,14 +16,15 @@ function latLonToVec3(lat: number, lon: number, alt: number): THREE.Vector3 {
   );
 }
 
-const TYPE_COLORS = {
+const TYPE_COLORS: Record<TrackableObject['type'], THREE.Color> = {
   aircraft: new THREE.Color('#00d4ff'),
   satellite: new THREE.Color('#22dda0'),
   rocket: new THREE.Color('#ff8800'),
-} as const;
+  vessel: new THREE.Color('#a78bfa'),
+};
 
 function getColor(type: TrackableObject['type']): THREE.Color {
-  return TYPE_COLORS[type].clone();
+  return (TYPE_COLORS[type] || TYPE_COLORS.aircraft).clone();
 }
 
 interface TrackingLayerProps {
@@ -73,7 +74,10 @@ function TrackingLayerInner({ objects }: TrackingLayerProps) {
 
       const isHovered = hoveredObject?.id === obj.id;
       const isSelected = selectedObject?.id === obj.id;
-      const baseScale = obj.type === 'aircraft' ? 0.013 : obj.type === 'satellite' ? 0.015 : 0.02;
+      const baseScale =
+        obj.type === 'aircraft' ? 0.013 :
+        obj.type === 'satellite' ? 0.015 :
+        obj.type === 'vessel' ? 0.014 : 0.02;
       const pulse = isSelected ? 1 + Math.sin(time.current * 3) * 0.25 : 1;
       const hoverScale = isHovered ? 1.8 : 1;
       const scale = baseScale * pulse * hoverScale;
@@ -83,7 +87,6 @@ function TrackingLayerInner({ objects }: TrackingLayerProps) {
       dummy.updateMatrix();
       meshRef.current!.setMatrixAt(i, dummy.matrix);
 
-      // Color key to avoid unnecessary updates
       const colorKey = `${obj.type}-${isHovered || isSelected ? 'hi' : 'lo'}`;
       if (prevColors.current.get(obj.id) !== colorKey) {
         prevColors.current.set(obj.id, colorKey);
@@ -97,13 +100,11 @@ function TrackingLayerInner({ objects }: TrackingLayerProps) {
         glowRef.current!.setColorAt(i, gc);
       }
 
-      // Glow
       const glowMult = isHovered || isSelected ? 5 : 3.5;
       dummy.scale.setScalar(scale * glowMult);
       dummy.updateMatrix();
       glowRef.current!.setMatrixAt(i, dummy.matrix);
 
-      // Selection ring
       if (isSelected) {
         const ringScale = scale * 8 + Math.sin(time.current * 2) * scale * 2;
         dummy.scale.set(ringScale, ringScale, ringScale * 0.1);
@@ -135,7 +136,7 @@ function TrackingLayerInner({ objects }: TrackingLayerProps) {
   const handlePointerMove = useCallback((e: any) => {
     e.stopPropagation?.();
     const now = performance.now();
-    if (now - lastHoverTime.current < 50) return; // 50ms throttle
+    if (now - lastHoverTime.current < 50) return;
     lastHoverTime.current = now;
     const instanceId = e.instanceId;
     if (instanceId !== undefined && instanceId < objects.length) {
@@ -153,7 +154,6 @@ function TrackingLayerInner({ objects }: TrackingLayerProps) {
     e.stopPropagation?.();
     const instanceId = e.instanceId;
     if (instanceId !== undefined && instanceId < objects.length) {
-      // Shift+click for comparison
       if (e.nativeEvent?.shiftKey) {
         addComparedObject(objects[instanceId]);
       } else {
