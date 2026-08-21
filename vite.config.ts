@@ -27,16 +27,22 @@ export default defineConfig(({ mode }) => ({
     esbuildOptions: {
       target: "esnext",
     },
+    // Prevent satellite.js WASM pthreads path from breaking browser prebundle
+    exclude: ["satellite.js"],
   },
   build: {
     target: "esnext",
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
     rollupOptions: {
       output: {
+        format: "es",
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
-          supabase: ['@supabase/supabase-js'],
-          ui: ['framer-motion', 'sonner', 'zustand'],
+          vendor: ["react", "react-dom", "react-router-dom"],
+          three: ["three", "@react-three/fiber", "@react-three/drei"],
+          supabase: ["@supabase/supabase-js"],
+          ui: ["framer-motion", "sonner", "zustand"],
         },
       },
     },
