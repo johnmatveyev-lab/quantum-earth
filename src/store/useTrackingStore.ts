@@ -107,7 +107,7 @@ interface TrackingState {
   toggleRockets: () => void;
   toggleStarlink: () => void;
   toggleVessels: () => void;
-  selectExclusiveCategory: (category: 'aircraft' | 'satellites' | 'rockets' | 'starlink' | 'all') => void;
+  selectExclusiveCategory: (category: 'aircraft' | 'satellites' | 'rockets' | 'starlink' | 'vessels' | 'all') => void;
   setSimulationSpeed: (s: number) => void;
   setSearchQuery: (q: string) => void;
   setDataSource: (s: 'simulation' | 'live') => void;
@@ -131,6 +131,8 @@ interface TrackingState {
   addGeofence: (g: Geofence) => void;
   removeGeofence: (id: string) => void;
   toggleGeofenceDrawMode: () => void;
+  setWatchlists: (w: WatchlistMeta[]) => void;
+  setActiveWatchlistId: (id: string | null) => void;
   toggleWatchlistPanel: () => void;
 }
 
@@ -196,6 +198,7 @@ export const useTrackingStore = create<TrackingState>((set, get) => ({
     showSatellites: category === 'satellites' || category === 'all',
     showRockets: category === 'rockets' || category === 'all',
     showStarlink: category === 'starlink' || category === 'all',
+    showVessels: category === 'vessels' || category === 'all',
   })),
   setSimulationSpeed: (simulationSpeed) => set({ simulationSpeed }),
   setSearchQuery: (searchQuery) => set({ searchQuery }),
